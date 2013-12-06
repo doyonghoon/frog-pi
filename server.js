@@ -8,8 +8,6 @@ http.createServer(function(req, res) {
 	res.write("frog-pi connected...");
 	res.end();
 
-	console.log("frog-pi-console connected");
-
 	// iv = setInterval(function() {
 	//     led.writeSync(led.readSync() === 0 ? 1 : 0); // 1 = on, 0 = off :)
 	// }, 200);
@@ -26,7 +24,7 @@ http.createServer(function(req, res) {
 
 	    led.read(function(err, value) {  // Asynchronous read.
 	        if (err) throw err;
-
+		console.log("frog-pi-console connected: value: " + value);
 	        led.write(value === 0 ? 1 : 0, function(err) { // Asynchronous write.
 	            if (err) throw err;
 	        });
@@ -34,7 +32,7 @@ http.createServer(function(req, res) {
 
 	    setTimeout(function() {
 	        blink(count - 1);
-	    }, 200);
-	})(20);
+	    }, 500);
+	})(500);
 
 }).listen(8080);
