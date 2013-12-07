@@ -18,11 +18,6 @@ exports.index = function(req, res) {
 			statusValue: statusValue
 		});
 	});
-
-	res.render('index', {
-			title: 'Frog Pi',
-			statusValue: statusValue
-	});
 };
 
 function isOn(value) {
