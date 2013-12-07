@@ -11,6 +11,12 @@ exports.index = function(req, res) {
 	var statusValue = '';
 	led.read(function(err, value) {
 		if (err) throw err;
+		if (value === 0) {
+			led.write(1, function(err) {
+				if (err throw) err;
+			});
+		}
+
 		statusValue = getStatusValue(value);
 
 		res.render('index', {
@@ -18,10 +24,6 @@ exports.index = function(req, res) {
 			statusValue: statusValue
 		});
 	});
-
-	// led.write(1, function(err) {
-	// 	if (err) throw err;
-	// });
 };
 
 function getStatusValue(value) {
