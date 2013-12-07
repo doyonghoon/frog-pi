@@ -25,13 +25,13 @@ exports.index = function(req, res) {
 };
 
 function getStatusValue(value) {
-	if (status === -1) {
+	if (value === -1) {
 		return '알 수 없음';
 	}
-	else if (status === 0) {
+	else if (value === 0) {
 		return '꺼져 있음';
 	}
-	else if (status === 1) {
+	else if (value === 1) {
 		return '켜져 있음';
 	}
 }

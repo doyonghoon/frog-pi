@@ -11,7 +11,7 @@ b-cov
  logs
  results
   
-  /light-pi/node_modules
-  /light-pi/npm-debug.log
+  light-pi/node_modules
+  light-pi/npm-debug.log
   node_modules
   npm-debug.log
