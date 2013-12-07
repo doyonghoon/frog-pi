@@ -10,11 +10,11 @@ exports.index = function(req, res) {
 	var status = -1;
 	var statusValue = '';
 	led.read(function(err, value) {
-		if (err) throw err;
-		if (value === 0) {
-			led.write(1, function(err) {
-				if (err) throw err;
-			});
+		handleErr(err);
+		if (isOn(value)) {
+			turnOff();
+		} else {
+			turnOn();
 		}
 
 		statusValue = getStatusValue(value);
@@ -26,6 +26,22 @@ exports.index = function(req, res) {
 	});
 };
 
+function isOn(value) {
+	return value === 1;
+}
+
+function turnOn() {
+	controlSwitch(1);
+}
+
+function turnOff() {
+	controlSwitch(0);
+}
+
+function controlSwitch(value) {
+	led.write(value, function(err) {handleErr(err);});
+}
+
 function getStatusValue(value) {
 	if (value === -1) {
 		return '알 수 없음';
@@ -36,4 +52,8 @@ function getStatusValue(value) {
 	else if (value === 1) {
 		return '켜져 있음';
 	}
+}
+
+function handleErr(err) {
+	if (err) throw err;
 }
