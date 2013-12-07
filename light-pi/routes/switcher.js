@@ -11,7 +11,7 @@ exports.switcher = function(req, res) {
 	led.read(function(err, value) {
 		handleErr(err);
 
-		controlSwitch(switcherValue);
+		led.write(1, function(err) {handleErr(err);});
 		console.log("controlSwitch: " + switcherValue);
 
 		statusValue = getStatusValue(value);
