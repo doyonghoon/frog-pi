@@ -13,7 +13,7 @@ exports.index = function(req, res) {
 		if (err) throw err;
 		if (value === 0) {
 			led.write(1, function(err) {
-				if (err throw) err;
+				if (err) throw err;
 			});
 		}
 
