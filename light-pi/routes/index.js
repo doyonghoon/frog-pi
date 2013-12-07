@@ -17,7 +17,7 @@ exports.index = function(req, res) {
 			turnOn();
 		}
 
-		statusValue = getStatusValue(value);
+		statusValue = getStatusValue(value === 0 ? 1 : 0);
 
 		res.render('index', {
 			title: 'Frog Pi',
