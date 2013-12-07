@@ -1,29 +1,29 @@
-
-/*
- * GET home page.
- */
 var Gpio = require('onoff').Gpio, // Constructor function for Gpio objects.
     led = new Gpio(17, 'out'),    // Export GPIO #17 as an output.
     iv;
 
-exports.index = function(req, res) {
+exports.switcher = function(req, res) {
+	var status = -1;
+	var statusValue = 'default';
+	var switcherValue = req.param('switcherValue');
+
 	var status = -1;
 	var statusValue = 'default';
 	led.read(function(err, value) {
 		handleErr(err);
-		statusValue = getStatusValue(value);
+		if (switcherValue === 1 || switcherValue === 0) {
+			controlSwitch(switcherValue);
+		}
+
+		statusValue = getStatusValue(value === 0 ? 1 : 0);
 
 		res.render('index', {
 			title: 'Frog Pi',
 			statusValue: statusValue
 		});
 	});
-
-	res.render('index', {
-			title: 'Frog Pi',
-			statusValue: statusValue
-	});
 };
+
 
 function isOn(value) {
 	return value === 1;
