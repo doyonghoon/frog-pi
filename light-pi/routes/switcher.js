@@ -8,16 +8,15 @@ exports.switcher = function(req, res) {
 	var switcherValue = req.param('switcherValue');
 	console.log("value: " + switcherValue);
 
-	var status = -1;
-	var statusValue = 'default';
 	led.read(function(err, value) {
 		handleErr(err);
 
 		controlSwitch(switcherValue);
 		console.log("controlSwitch: " + switcherValue);
 
-		statusValue = getStatusValue(value === 0 ? 1 : 0);
+		statusValue = getStatusValue(value);
 		console.log("statusValue: " + statusValue);
+
 		res.render('index', {
 			title: 'Frog Pi',
 			statusValue: statusValue
