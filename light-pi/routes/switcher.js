@@ -6,25 +6,31 @@ exports.switcher = function(req, res) {
 	var status = -1;
 	var statusValue = 'default';
 	var switcherValue = req.param('switcherValue');
+
 	console.log("value: " + switcherValue);
 
 	led.read(function(err, value) {
 		handleErr(err);
-
 		if (switcherValue === '1') {
-			led.write(1, function(err) {handleErr(err);});
-		} else {
 			led.write(0, function(err) {handleErr(err);});
+		} else if (switcherValue === '0') {
+			led.write(1, function(err) {handleErr(err);});
+		} else if (switcherValue === '2') {
+			res.writeHead(200, {'Content-Type': 'text/plain'});
+			res.end('' + value);
 		}
+
 		console.log("controlSwitch: " + switcherValue);
 
 		statusValue = getStatusValue(value);
 		console.log("statusValue: " + statusValue);
 
-		res.render('index', {
-			title: 'Frog Pi',
-			statusValue: statusValue
-		});
+		if (switcherValue !== '2') {
+			res.render('index', {
+				title: 'Frog Pi',
+				statusValue: statusValue
+			});
+		}
 	});
 };
 

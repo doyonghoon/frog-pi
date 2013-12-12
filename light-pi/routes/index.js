@@ -41,10 +41,10 @@ function getStatusValue(value) {
 		return '알 수 없음';
 	}
 	else if (value === 0) {
-		return '꺼져 있음';
+		return 'ON';
 	}
 	else if (value === 1) {
-		return '켜져 있음';
+		return 'OFF';
 	}
 }
 
