@@ -1,5 +1,6 @@
 var Gpio = require('onoff').Gpio, // Constructor function for Gpio objects.
     led = new Gpio(17, 'out'),    // Export GPIO #17 as an output.
+    temp = new Gpio(21, 'in'),
     iv;
 
 exports.switcher = function(req, res) {
